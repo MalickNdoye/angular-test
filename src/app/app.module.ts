@@ -23,7 +23,7 @@ const appRoutes: Routes = [
   {path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent},
   {path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent},
   {path: 'edit', canActivate: [AuthGuard], component: EditAppareilComponent},
-  {path: 'new-user',canActivate: [AuthGuard], component: NewUserComponent},
+  {path: 'new-user', canActivate: [AuthGuard], component: NewUserComponent},
   {path: 'not-found', component: Error404Component},
   {path: 'users', canActivate: [AuthGuard], component: UserListComponent},
   {path: '**', redirectTo: 'not-found' }
