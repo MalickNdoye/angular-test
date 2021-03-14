@@ -1,5 +1,9 @@
 import { Subject } from 'rxjs/Subject';
 import 'rxjs-compat' ;
+import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+
+@Injectable()
 export class AppareilService {
   appareilsSubject: Subject<any>;
 
@@ -21,7 +25,7 @@ export class AppareilService {
     },
   ] ;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.appareilsSubject = new Subject<any>();
   }
 
@@ -72,5 +76,18 @@ export class AppareilService {
     appareilObject.id = this.appareils[(this.appareils.length - 1)].id + 1;
     this.appareils.push(appareilObject);
     this.emitAppareilSubject();
+  }
+
+  saveAppareilsToServer(): void {
+    this.httpClient
+      .post('https://angular-test-160f2-default-rtdb.firebaseio.com/appareils.json', this.appareils)
+      .subscribe(
+        () => {
+          console.log('Enregistrement terminé !');
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
   }
 }
